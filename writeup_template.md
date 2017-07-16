@@ -16,17 +16,18 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [solidWhiteCurve-segments]: ./test_images_output/solidWhiteCurve-segments.jpg "solidWhiteCurve-segments"
-
 [solidWhiteRight-segments]: ./test_images_output/solidWhiteRight-segments.jpg "solidWhiteRight-segments"
-
 [solidYellowCurve-segments]: ./test_images_output/solidYellowCurve-segments.jpg "solidYellowCurve-segments"
-
 [solidYellowCurve2-segments]: ./test_images_output/solidYellowCurve2-segments.jpg "solidYellowCurve2-segments"
-
 [solidYellowLeft-segments]: ./test_images_output/solidYellowLeft-segments.jpg "solidYellowLeft-segments"
-
 [whiteCarLaneSwitch-segments]: ./test_images_output/whiteCarLaneSwitch-segments.jpg "whiteCarLaneSwitch-segments"
 
+[solidWhiteCurve]: ./test_images_output/solidWhiteCurve.jpg "solidWhiteCurve"
+[solidWhiteRight]: ./test_images_output/solidWhiteRight.jpg "solidWhiteRight"
+[solidYellowCurve]: ./test_images_output/solidYellowCurve.jpg "solidYellowCurve"
+[solidYellowCurve2]: ./test_images_output/solidYellowCurve2.jpg "solidYellowCurve2"
+[solidYellowLeft]: ./test_images_output/solidYellowLeft.jpg "solidYellowLeft"
+[whiteCarLaneSwitch]: ./test_images_output/whiteCarLaneSwitch.jpg "whiteCarLaneSwitch"
 
 ---
 
@@ -65,7 +66,7 @@ min_line_length = 10
 max_line_gap = 10
 ```
 
-The initial pipeline was straightforward to implement, as I used the helper functions provided. I spent a bit of time trying to optimize the parameters to achieve the best result, and I ultimately settled on the values indicated above. The resulting images before modification of the draw_lines functions are below.
+The initial pipeline was straightforward to implement, as I used the helper functions provided. I spent a bit of time trying to optimize the parameters to achieve the best result, and I ultimately settled on the values indicated above. The resulting images before modification of the `draw_lines` functions are below.
 
 ![alt text][solidWhiteCurve-segments]
 ![alt text][solidWhiteRight-segments]
@@ -74,7 +75,18 @@ The initial pipeline was straightforward to implement, as I used the helper func
 ![alt text][solidYellowLeft-segments]
 ![alt text][whiteCarLaneSwitch-segments]
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+In order to draw a single line on the left and right lanes, I modified the `draw_lines` function as follows. For each line segment, I found the slope and the value of b such that the I had an equation of a line in the form of `y = mx + b`. If the value of the slope was between 0.5 and 1.5, I designated this line as part of the left lane. If the value of the slop was between -1.5 and -0.5, then it was part of the right lane.
+
+I already had the minimum and maximum y values for the left lane line segment and the right lane line segment, which I set as the minimum and maximum values of the mask. I then just had to calculate the x values for each line segment at the minimum and maximum y values using the m and b values we found earlier. For each line segment, I added all of these x values into an array, and averaged them once we had processed all of the line segments.
+
+This gave me the results below.
+
+![alt text][solidWhiteCurve]
+![alt text][solidWhiteRight]
+![alt text][solidYellowCurve]
+![alt text][solidYellowCurve2]
+![alt text][solidYellowLeft]
+![alt text][whiteCarLaneSwitch]
 
 ### 2. Identify potential shortcomings with your current pipeline
 
