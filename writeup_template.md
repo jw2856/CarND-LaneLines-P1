@@ -40,26 +40,30 @@ My pipeline followed the steps taught in the lesson, as follows:
 
 2. Apply a gaussian blur to the image
 
-kernel_size = 3
+`kernel_size = 3`
 
 3. Use Canny edge detection to isolate the edges
 
+```
 low_threshold = 50
 high_threshold = 150
+```
 
 4. Apply a mask to the image
 
-vertices = (0,imshape[0]), (imshape[1]/2-20, imshape[0]/2+55), (imshape[1]/2+20, imshape[0]/2+55), (imshape[1],imshape[0])
+`vertices = (0,imshape[0]), (imshape[1]/2-20, imshape[0]/2+55), (imshape[1]/2+20, imshape[0]/2+55), (imshape[1],imshape[0])`
 
 This created a trapezoidal mask with vertices at (0, 540), (460, 325), (500, 325), and (960, 540). 
 
 5. Find lines in the masked image using the Hough transform
 
+```
 rho = 2
 theta = np.pi/180
 threshold = 20
 min_line_length = 10
 max_line_gap = 10
+```
 
 The initial pipeline was straightforward to implement, as I used the helper functions provided. I spent a bit of time trying to optimize the parameters to achieve the best result, and I ultimately settled on the values indicated above. The resulting images before modification of the draw_lines functions are below.
 
@@ -68,7 +72,7 @@ The initial pipeline was straightforward to implement, as I used the helper func
 ![alt text][solidYellowCurve-segments]
 ![alt text][solidYellowCurve2-segments]
 ![alt text][solidYellowLeft-segments]
-![alt text][whiteCareLaneSwitch-segments]
+![alt text][whiteCarLaneSwitch-segments]
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
 
