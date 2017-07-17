@@ -1,0 +1,13 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+
+# OSX files
+.DS_Store
+
+# Environment Variables
+.env
