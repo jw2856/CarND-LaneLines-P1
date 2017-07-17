@@ -11,3 +11,5 @@ pids
 
 # Environment Variables
 .env
+
+.ipynb_checkpoints
