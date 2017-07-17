@@ -95,7 +95,7 @@ This gave me the results below.
 ![alt text][solidYellowLeft]
 ![alt text][whiteCarLaneSwitch]
 
-I applied the pipeline to the video files, and while the lane lines seemed to be correctly identified, the lines were jittery and jumped around, more so than the example video. To attempt to fix this, I modified the `draw_lines` function to use a weighted average instead of just an average. The new algorithm gives added weight to longer lines, rather than equal weight to all lines regardless of length. This seemed to improve the lane-finding algorithm, and improved the jitter. The results on the images are below. Compared to the original results, these lines seemed to be more accurate.
+I applied the pipeline to the video files, and while the lane lines seemed to be correctly identified, the lines were jittery and jumped around, more so than the example video. To attempt to fix this, I modified the `draw_lines` function to use a weighted average instead of just an average. The new algorithm gives added weight to longer lines, rather than equal weight to all lines regardless of length. This seemed to improve the lane-finding algorithm, and improved the jitter on the videos. The results on the images are below. Compared to the original results, these lines seemed to be more accurate.
 
 ![alt text][solidWhiteCurve-weighted]
 ![alt text][solidWhiteRight-weighted]
@@ -104,16 +104,26 @@ I applied the pipeline to the video files, and while the lane lines seemed to be
 ![alt text][solidYellowLeft-weighted]
 ![alt text][whiteCarLaneSwitch-weighted]
 
+The videos using the weighted average algorithm are suffixed with `-weighted`.
+
+However, there was still a jitter apparent on the videos. I decided to implement a rolling average of the x values using the latest 10 values of x, combined with using the weighted average algorithm to get the x values for each new frame. This resulted in a very nice, smooth result in the videos.
+
+The videos using the buffer and weighted average are suffixed with `-buffered`.
+
 ### 2. Identify potential shortcomings with your current pipeline
 
+The algorithm worked very well on the `solidWhiteRight.mp4` video and the `solidYellowLeft.mp4` video. It seemed to work adequately on the `challenge.mp4` video. However, there were still some moments where the algorithm would be confused by the presence of other lines within the mask, and the lane lines would veer out of place.
 
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
-
+The algorithm also relied on set values for the mask polygon and for the range of slopes to determine if a line was on the left or right side. Setting these values makes this algorithm likely to be unsuitable for situations other than when a car is within a lane that fits within the mask.
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+The algorithm can potentially be improved as follows:
 
-Another potential improvement could be to ...
+- Using a color filter early on in the pipeline to isolate lane lines. This might help with the challenge video, since there were shadows and other lines that tended to skew the result.
+
+- Doing additional tweaking of the parameters to find an optimal set of parameters for the mask size, slope ranges, gaussian blur, edge detection, and hough transform algorithms.
+
+- Cosmetically, the algorithm can be adjusted so that the drawn lines do not overlap, as they do in the challenge result.
+
+- The buffer currently is implemented extremely naively, in that all the historical values of x are stored. The buffer can be implemented to discard unneeded values to free up memory.
