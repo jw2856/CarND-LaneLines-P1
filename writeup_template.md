@@ -114,7 +114,7 @@ The algorithm also relied on set values for the mask polygon and for the range o
 
 The algorithm can potentially be improved as follows:
 
-- Using a color filter early on in the pipeline to isolate lane lines. This might help with the challenge video, since there were shadows and other lines that tended to skew the result.
+- Using a color filter early on in the pipeline to isolate lane lines. This might help with the challenge video, since there were shadows and other lines that tended to skew the results in some of the frames.
 
 - Doing additional tweaking of the parameters to find an optimal set of parameters for the mask size, slope ranges, gaussian blur, edge detection, and hough transform algorithms.
 
