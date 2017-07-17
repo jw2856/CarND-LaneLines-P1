@@ -29,6 +29,13 @@ The goals / steps of this project are the following:
 [solidYellowLeft]: ./test_images_output/solidYellowLeft.jpg "solidYellowLeft"
 [whiteCarLaneSwitch]: ./test_images_output/whiteCarLaneSwitch.jpg "whiteCarLaneSwitch"
 
+[solidWhiteCurve-weighted]: ./test_images_output/solidWhiteCurve-weighted.jpg "solidWhiteCurve-weighted"
+[solidWhiteRight-weighted]: ./test_images_output/solidWhiteRight-weighted.jpg "solidWhiteRight-weighted"
+[solidYellowCurve-weighted]: ./test_images_output/solidYellowCurve-weighted.jpg "solidYellowCurve-weighted"
+[solidYellowCurve2-weighted]: ./test_images_output/solidYellowCurve2-weighted.jpg "solidYellowCurve2-weighted"
+[solidYellowLeft-weighted]: ./test_images_output/solidYellowLeft-weighted.jpg "solidYellowLeft-weighted"
+[whiteCarLaneSwitch-weighted]: ./test_images_output/whiteCarLaneSwitch-weighted.jpg "whiteCarLaneSwitch-weighted"
+
 ---
 
 ### Reflection
@@ -87,6 +94,15 @@ This gave me the results below.
 ![alt text][solidYellowCurve2]
 ![alt text][solidYellowLeft]
 ![alt text][whiteCarLaneSwitch]
+
+I applied the pipeline to the video files, and while the lane lines seemed to be correctly identified, the lines were jittery and jumped around, more so than the example video. To attempt to fix this, I modified the `draw_lines` function to use a weighted average instead of just an average. The new algorithm gives added weight to longer lines, rather than equal weight to all lines regardless of length. This seemed to improve the lane-finding algorithm, and improved the jitter. The results on the images are below. Compared to the original results, these lines seemed to be more accurate.
+
+![alt text][solidWhiteCurve-weighted]
+![alt text][solidWhiteRight-weighted]
+![alt text][solidYellowCurve-weighted]
+![alt text][solidYellowCurve2-weighted]
+![alt text][solidYellowLeft-weighted]
+![alt text][whiteCarLaneSwitch-weighted]
 
 ### 2. Identify potential shortcomings with your current pipeline
 
