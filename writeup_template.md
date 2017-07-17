@@ -102,7 +102,7 @@ The videos using the weighted average algorithm are suffixed with `-weighted`.
 
 However, there was still a jitter apparent on the videos. I decided to implement a rolling average of the x values using the latest 10 values of x, combined with using the weighted average algorithm to get the x values for each new frame. This resulted in a very nice, smooth result in the videos.
 
-The videos using the buffer and weighted average are suffixed with `-buffered`.
+The videos using the buffer and weighted average are suffixed with `-buffered`. Please consider these videos as the submission files.
 
 ### 2. Identify potential shortcomings with your current pipeline
 
